@@ -1,0 +1,469 @@
+/* =====================================================
+   ICE CRYSTAL THEME VARIABLES
+===================================================== */
+:root {
+    --ice-bg: #F8FAFC;
+    --ice-card: rgba(255, 255, 255, 0.75);
+    --ice-border: rgba(15, 23, 42, 0.1);
+
+    --ice-blue: #38BDF8;
+    --ice-cyan: #22D3EE;
+    --ice-slate: #1E293B;
+
+    --text-main: #0F172A;
+    --text-muted: #475569;
+
+    --radius-lg: 20px;
+    --radius-md: 14px;
+}
+
+/* =====================================================
+   GLOBAL RESET
+===================================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, #F8FAFC, #E0F2FE);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* =====================================================
+   SOFT ANIMATED LIGHT WAVES
+===================================================== */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(56,189,248,0.25), transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(34,211,238,0.25), transparent 45%);
+    animation: waveMove 10s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes waveMove {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-40px); }
+}
+
+/* =====================================================
+   HEADER (LOGO + ANIMATED TITLE)
+===================================================== */
+.header {
+    position: relative;
+    background: linear-gradient(135deg, #38BDF8, #22D3EE);
+    color: #0F172A;
+    padding: 45px 20px;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(56,189,248,0.5);
+    z-index: 2;
+}
+
+/* Header content */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+/* Logo */
+.logo {
+    font-size: 56px;
+    animation: logoPop 0.9s ease forwards;
+}
+
+/* Title */
+.title {
+    margin: 0;
+    text-align: left;
+    font-size: clamp(30px, 4.5vw, 46px);
+    font-weight: 900;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    animation: slideFade 1.2s ease forwards;
+}
+
+/* Second line */
+.title span {
+    display: block;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    opacity: 0.9;
+}
+
+/* Header animations */
+@keyframes slideFade {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes logoPop {
+    from {
+        opacity: 0;
+        transform: scale(0.6) rotate(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+.main-content {
+    flex: 1;
+    padding: 50px 20px;
+    z-index: 1;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+.footer {
+    background: #E0F2FE;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 16px;
+    font-size: 14px;
+    border-top: 1px solid var(--ice-border);
+    z-index: 2;
+}
+
+/* =====================================================
+   DASHBOARD (FULL PAGE GRID)
+===================================================== */
+.dashboard-container {
+    min-height: calc(100vh - 260px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 45px;
+    align-items: center;
+    justify-items: center;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.dashboard-card {
+    width: 300px;
+    padding: 40px 30px;
+    border-radius: var(--radius-lg);
+    background: var(--ice-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--ice-border);
+    text-align: center;
+    position: relative;
+    animation: floatIce 6s ease-in-out infinite;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
+    transition: transform 0.4s ease;
+}
+
+.dashboard-card:nth-child(2) { animation-delay: 1s; }
+.dashboard-card:nth-child(3) { animation-delay: 2s; }
+
+@keyframes floatIce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* Ice shine */
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(56,189,248,0.25),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.dashboard-card:hover::before {
+    opacity: 1;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-10px) scale(1.03);
+}
+
+/* Click safe */
+.dashboard-card a {
+    position: relative;
+    z-index: 3;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--ice-slate);
+}
+
+/* =====================================================
+   FORMS (GLASS ICE STYLE)
+===================================================== */
+.form-box {
+    max-width: 480px;
+    margin: auto;
+    padding: 42px;
+    border-radius: var(--radius-lg);
+    background: var(--ice-card);
+    backdrop-filter: blur(22px);
+    border: 1px solid var(--ice-border);
+    box-shadow: 0 25px 70px rgba(15, 23, 42, 0.18);
+    animation: glowIce 3s infinite alternate;
+}
+
+@keyframes glowIce {
+    from { box-shadow: 0 0 25px rgba(56,189,248,0.4); }
+    to   { box-shadow: 0 0 45px rgba(34,211,238,0.6); }
+}
+
+label {
+    font-weight: 700;
+    margin-top: 18px;
+    display: block;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--ice-border);
+    color: var(--text-main);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--ice-blue);
+    box-shadow: 0 0 15px rgba(56,189,248,0.6);
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+button {
+    width: 100%;
+    margin-top: 28px;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: 800;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    color: #0F172A;
+    background: linear-gradient(135deg, #E0F2FE, #38BDF8, #22D3EE);
+    animation: icePulse 2s infinite;
+}
+
+@keyframes icePulse {
+    0% { box-shadow: 0 0 10px rgba(56,189,248,0.6); }
+    50% { box-shadow: 0 0 35px rgba(34,211,238,0.8); }
+    100% { box-shadow: 0 0 10px rgba(56,189,248,0.6); }
+}
+
+/* =====================================================
+   GRADING CARD
+===================================================== */
+.grade-card {
+    margin-top: 30px;
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    background: var(--ice-card);
+    border: 1px solid var(--ice-border);
+    box-shadow: 0 25px 60px rgba(15,23,42,0.2);
+    animation: slideIce 0.5s ease;
+}
+
+@keyframes slideIce {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media (max-width: 900px) {
+    .dashboard-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .title {
+        text-align: center;
+    }
+}
+/* =====================================================
+   HERO HEADING (FIRST IMPRESSION)
+===================================================== */
+.hero-header {
+    padding: 70px 20px 80px;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+/* Logo */
+.hero-logo {
+    font-size: 72px;
+    margin-bottom: 15px;
+    animation: heroPop 0.8s ease forwards;
+}
+
+/* Main title */
+.hero-title {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin: 10px 0;
+    animation: heroSlide 1s ease forwards;
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    color: var(--ice-slate);
+    margin-top: 10px;
+    animation: heroFade 1.4s ease forwards;
+}
+
+/* Tagline text */
+.hero-tagline {
+    max-width: 700px;
+    margin: 22px auto 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    animation: heroFade 1.7s ease forwards;
+}
+
+/* Animations */
+@keyframes heroPop {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes heroSlide {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* =====================================================
+   GRADING PANEL IMPROVEMENTS
+===================================================== */
+
+.grading-box {
+    max-width: 520px;
+}
+
+/* Section title */
+.section-title {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--ice-slate);
+}
+
+/* Submission details card */
+.submission-card {
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    background: rgba(255,255,255,0.85);
+    border: 1px solid var(--ice-border);
+    box-shadow: 0 15px 40px rgba(15,23,42,0.15);
+    animation: slideIce 0.4s ease;
+}
+
+/* Info rows */
+.submission-card p {
+    margin: 12px 0;
+    font-size: 16px;
+}
+
+/* Status badges */
+.status {
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+.status.success {
+    background: rgba(34,197,94,0.15);
+    color: #15803D;
+}
+
+.status.error {
+    background: rgba(239,68,68,0.15);
+    color: #B91C1C;
+}
+
+/* Improve inputs inside submission card */
+.submission-card input,
+.submission-card textarea {
+    margin-top: 6px;
+}
+
+/* Save button spacing */
+.submission-card button {
+    margin-top: 22px;
+}
+

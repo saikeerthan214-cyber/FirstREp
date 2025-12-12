@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Grading Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-content">
+        <div class="logo">🧑‍🏫</div>
+        <h1 class="title">
+            Teacher Grading Panel
+            <span>Evaluate & Provide Feedback</span>
+        </h1>
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="form-box grading-box">
+
+        <!-- Section Title -->
+        <h2 class="section-title">Student Evaluation</h2>
+
+        <!-- Student Selector -->
+        <label>Select Student</label>
+        <select id="studentSelect" onchange="showSelectedStudent()">
+            <option value="">-- Choose Roll Number --</option>
+        </select>
+
+        <!-- Student Submission Details -->
+        <div id="submissionBox" class="submission-card"></div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    © 2025 Assignment Management System | LMS Project
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
